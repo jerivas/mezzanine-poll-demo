@@ -1,6 +1,8 @@
 #-*- coding: utf-8 -*-
 from django.contrib import admin
 
+from mezzanine.core.admin import DisplayableAdmin
+
 from .models import Choice, Poll
 
 
@@ -10,15 +12,8 @@ class ChoiceInline(admin.TabularInline):
     extra = 3
 
 
-class PollAdmin(admin.ModelAdmin):
-    fieldsets = [
-        (None, {
-            'fields': ['question'],
-        }),
-    ]
+class PollAdmin(DisplayableAdmin):
     inlines = [ChoiceInline]
-    list_display = ('question',)
-    search_fields = ['question']
 
 admin.site.register(Poll, PollAdmin)
 admin.site.register(Choice)

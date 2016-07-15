@@ -1,12 +1,14 @@
 #-*- coding: utf-8 -*-
 from django.db import models
+from django.core.urlresolvers import reverse
+
+from mezzanine.core.models import Displayable
 
 
-class Poll(models.Model):
-    question = models.CharField(max_length=200)
+class Poll(Displayable):
 
-    def __unicode__(self):  # Python 3: def __str__(self):
-        return self.question
+    def get_absolute_url(self):
+        return reverse('polls:detail', args=[self.pk])
 
 
 class Choice(models.Model):
