@@ -1,0 +1,28 @@
+# Copy and rename this file as "local_settings.py"
+# Store development-only settings here
+
+# This file is exec'd from settings.py, so it has access to and can
+# modify all the variables in settings.py.
+
+DEBUG = True
+
+# Make these unique, and don't share it with anybody.
+SECRET_KEY = "k!j2f-8jtx_-!-lb6rteqia9dlhy1q%05@7l)dhq@904@0zzg^"
+NEVERCACHE_KEY = "$-a=aajam-+qu4=1tyfp+++m$1@lgbwxswzv03(f2ym=-j11k_"
+
+DATABASES = {
+    "default": {
+        # Ends with "postgresql_psycopg2", "mysql", "sqlite3" or "oracle".
+        "ENGINE": "django.db.backends.sqlite3",
+        # DB name or path to database file if using sqlite3.
+        "NAME": "dev.db",
+        # Not used with sqlite3.
+        "USER": "",
+        # Not used with sqlite3.
+        "PASSWORD": "",
+        # Set to empty string for localhost. Not used with sqlite3.
+        "HOST": "",
+        # Set to empty string for default. Not used with sqlite3.
+        "PORT": "",
+    }
+}
