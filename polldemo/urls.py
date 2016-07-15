@@ -66,6 +66,9 @@ urlpatterns += [
 
     # url("^$", mezzanine.blog.views.blog_post_list, name="home"),
 
+    # Polls urls
+    url("^polls/", include("polls.urls", namespace="polls")),
+
     # MEZZANINE'S URLS
     # ----------------
     # ADD YOUR OWN URLPATTERNS *ABOVE* THE LINE BELOW.
