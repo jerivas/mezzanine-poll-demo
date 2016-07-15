@@ -2,7 +2,7 @@
 from django.db import models
 from django.core.urlresolvers import reverse
 
-from mezzanine.core.models import Displayable
+from mezzanine.core.models import Displayable, Orderable
 
 
 class Poll(Displayable):
@@ -11,7 +11,7 @@ class Poll(Displayable):
         return reverse('polls:detail', args=[self.slug])
 
 
-class Choice(models.Model):
+class Choice(Orderable):
     poll = models.ForeignKey(Poll)
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(default=0)

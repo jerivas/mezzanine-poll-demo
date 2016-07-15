@@ -1,15 +1,14 @@
 #-*- coding: utf-8 -*-
 from django.contrib import admin
 
-from mezzanine.core.admin import DisplayableAdmin
+from mezzanine.core.admin import DisplayableAdmin, TabularDynamicInlineAdmin
 
 from .models import Choice, Poll
 
 
-class ChoiceInline(admin.TabularInline):
+class ChoiceInline(TabularDynamicInlineAdmin):
     model = Choice
     readonly_fields = ('votes',)
-    extra = 3
 
 
 class PollAdmin(DisplayableAdmin):
