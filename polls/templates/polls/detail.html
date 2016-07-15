@@ -1,8 +1,17 @@
-{% extends 'polls/base.html' %}
+{% extends 'base.html' %}
 
-{% block polls_content %}
-<h1>{{ poll.title }}</h1>
+{% block meta_title %}{{ poll.meta_title }}{% endblock %}
 
+{% block title %}{{ poll.title }}{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li><a href="{% url 'polls:index' %}">Polls</a></li>
+<li class="active">{{ poll.title }}</li>
+{% endblock %}
+
+{% block main %}
+<p>Cast your vote below!</p>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="{% url 'polls:vote' poll.slug %}" method="post">
@@ -11,6 +20,6 @@
     <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
     <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
 {% endfor %}
-<input type="submit" value="Vote" />
+<input class="btn btn-primary" type="submit" value="Vote" />
 </form>
 {% endblock %}

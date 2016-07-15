@@ -1,13 +1,21 @@
-{% extends 'polls/base.html' %}
+{% extends 'base.html' %}
 
-{% block polls_content %}
-<h1>{{ poll.question }}</h1>
+{% block meta_title %}{{ poll.meta_title }}{% endblock %}
 
-<ul>
+{% block title %}{{ poll.title }}{% endblock %}
+
+{% block breadcrumb_menu %}
+{{ block.super }}
+<li><a href="{% url 'polls:index' %}">Polls</a></li>
+<li class="active">{{ poll.title }}</li>
+{% endblock %}
+
+{% block main %}
+<ul class="list-unstyled">
 {% for choice in poll.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+    <li>{{ choice.choice_text }} <span class="badge">{{ choice.votes }}</span></li>
 {% endfor %}
 </ul>
 
-<a href="{{ poll.get_absolute_url }}">Vote again?</a>
+<a href="{{ poll.get_absolute_url }}" class="btn btn-default">Vote again</a>
 {% endblock %}

@@ -1,8 +1,12 @@
-{% extends 'polls/base.html' %}
+{% extends 'base.html' %}
 
-{% block polls_content %}
+{% block meta_title %}Polls{% endblock %}
+
+{% block title %}Polls{% endblock %}
+
+{% block main %}
 {% if latest_poll_list %}
-    <ul>
+    <ul class="list-unstyled">
     {% for poll in latest_poll_list %}
 		<li>
 			<a href="{{ poll.get_absolute_url }}">{{ poll.title }}</a>
