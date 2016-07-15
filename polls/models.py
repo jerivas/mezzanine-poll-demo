@@ -8,7 +8,7 @@ from mezzanine.core.models import Displayable
 class Poll(Displayable):
 
     def get_absolute_url(self):
-        return reverse('polls:detail', args=[self.pk])
+        return reverse('polls:detail', args=[self.slug])
 
 
 class Choice(models.Model):

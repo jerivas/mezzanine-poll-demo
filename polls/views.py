@@ -25,8 +25,8 @@ class ResultsView(generic.DetailView):
     template_name = 'polls/results.html'
 
 
-def vote(request, poll_id):
-    p = get_object_or_404(Poll, pk=poll_id)
+def vote(request, slug):
+    p = get_object_or_404(Poll, slug=slug)
     try:
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
@@ -41,4 +41,4 @@ def vote(request, poll_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(p.id,)))
+        return HttpResponseRedirect(reverse('polls:results', args=(p.slug,)))
