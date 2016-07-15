@@ -12,21 +12,27 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_poll_list'
 
     def get_queryset(self):
-        return Poll.objects.all()[:5]
+        return Poll.objects.published()[:5]
 
 
 class DetailView(generic.DetailView):
     model = Poll
     template_name = 'polls/detail.html'
 
+    def get_queryset(self):
+        return Poll.objects.published()
+
 
 class ResultsView(generic.DetailView):
     model = Poll
     template_name = 'polls/results.html'
 
+    def get_queryset(self):
+        return Poll.objects.published()
+
 
 def vote(request, slug):
-    p = get_object_or_404(Poll, slug=slug)
+    p = get_object_or_404(Poll.objects.published(), slug=slug)
     try:
         selected_choice = p.choice_set.get(pk=request.POST['choice'])
     except (KeyError, Choice.DoesNotExist):
